@@ -1,0 +1,34 @@
+<h1 class="page-header">{{title}}</h1>
+<div class="list-group">
+    <a ng-repeat="movie in subjects" href="#/subject/{{movie.id}}" class="list-group-item">
+     <span class="badge">{{movie.rating.average}}</span>	
+        <div class="media">
+            <div class="media-left">
+                <img ng-src={{movie.images.small}}>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">{{movie.title}}</h4> 
+                <p>导演：<span ng-repeat="boss in movie.directors">{{boss.name}}<span ng-hide="$last">{{'、'}}</span></span></p>
+                <p>类型：{{movie.genres.join('、')}}</p>
+            </div>
+        </div>
+    </a>
+</div>
+<div class="loading" ng-hide="subjects.length">
+    <div class="loadEffect">
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+        <div><span></span></div>
+    </div>
+</div>
+<div ng-show='subjects.length'>
+    <p>一共有{{total}}条数据，共{{totalPage}}页,当前是第{{currentPage}}页</p>
+    <div>
+        <ul class="pager">
+          <li style="cursor: pointer;" ng-class="{'disabled':currentPage<=1}"><a ng-click="splicePage(currentPage-1)">&laquo;上一页</a></li>
+          <li style="cursor: pointer;" ng-class="{'disabled':currentPage>=totalPage}"><a ng-click="splicePage(currentPage+1)">下一页&raquo;</a></li>
+        </ul>
+    </div>
+</div>
+
